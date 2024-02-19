@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Using the same CSS file for styling -->
+</head>
+<body>
+    <div class="content">
+        <img src="giphy.gif" alt="Animated Image" class="question-gif">
+        <h1>Welcome!</h1>
+        <p>Ready for one of the best gifts made for you <3 ?</p>
+        <button id="startBtn" class="yes-button">Start!</button> <!-- Styled as the 'Yes' button for consistency -->
+    </div>
+
+    <script>
+        // JavaScript to handle the click event on the Start button
+        document.getElementById('startBtn').addEventListener('click', function() {
+            window.location.href = 'lore.html'; // Redirects to the game page
+        });
+    </script>
+    <!-- Add this to the <body> of every page -->
+<audio id="backgroundMusic" src="song.mp3" loop></audio>
+
+<script>
+    // JavaScript to play music continuously
+    const music = document.getElementById('backgroundMusic');
+
+    // Function to play music from a specified time
+    function playMusicFromTime(time) {
+        music.currentTime = time;
+        music.play();
+    }
+
+    // Start music on page load
+    window.addEventListener('load', () => {
+        // Check if there's a saved playback time in sessionStorage
+        const savedTime = sessionStorage.getItem('musicTime');
+        playMusicFromTime(savedTime ? parseFloat(savedTime) : 0);
+    });
+
+    // Save current music playback time before leaving the page
+    window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem('musicTime', music.currentTime);
+    });
+</script>
+
+</body>
+</html>
